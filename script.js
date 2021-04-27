@@ -32,6 +32,13 @@ function createGrid() {
     }
   }
 }
+createGrid();
+
+function handleGameGrid() {
+  for (let i = 0; i < gameGrid.length; i++) {
+    gameGrid[i].draw();
+  }
+}
 // projectiles
 // defenders
 // enemies
@@ -40,6 +47,7 @@ function createGrid() {
 function animate() {
   ctx.fillStyle = 'blue'
   ctx.fillRect(0, 0, controlsBar.width, controlsBar.height);
+  handleGameGrid();
   requestAnimationFrame(animate);
 }
 animate();
