@@ -25,6 +25,13 @@ class Cell {
     ctx.strokeRect(this.x, this.y, this.width, this.height);
   }
 }
+function createGrid() {
+  for (let y = cellSize; y < canvas.height; y += cellSize) {
+    for (let x = 0; x < canvas.width; x += cellSize) {
+      gameGrid.push(new Cell(x, y));
+    }
+  }
+}
 // projectiles
 // defenders
 // enemies
