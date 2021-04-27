@@ -8,6 +8,16 @@ const cellSize = 100;
 const cellGap = 3;
 const gameGrid = [];
 
+// mouse
+const mouse = {
+  x: undefined,
+  y: undefined,
+  width: 0.1,
+  height: 0.1
+}
+let canvasPosition = canvas.getBoundingClientRect();
+console.log(canvasPosition);
+
 // game board
 const controlsBar = {
   width: canvas.width,
