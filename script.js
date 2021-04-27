@@ -67,6 +67,8 @@ class Defender {
   constructor(x, y) {
     this.x = x;
     this.y = y;
+    this.width = cellSize;
+    this.height = cellSize;
 
   }
 }
