@@ -19,6 +19,8 @@ const controlsBar = {
 // resources
 // utilities
 function animate() {
-
+  ctx.fillStyle = 'blue'
+  ctx.fillRect(0, 0, controlsBar.width, controlsBar.height);
   requestAnimationFrame(animate);
 }
+animate();
