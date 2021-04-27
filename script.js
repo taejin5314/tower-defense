@@ -7,6 +7,8 @@ canvas.height = 600;
 const cellSize = 100;
 const cellGap = 3;
 const gameGrid = [];
+const defenders = [];
+let defenderCost = 100;
 
 // mouse
 const mouse = {
@@ -61,6 +63,13 @@ function handleGameGrid() {
 }
 // projectiles
 // defenders
+class Defender {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+
+  }
+}
 // enemies
 // resources
 // utilities
