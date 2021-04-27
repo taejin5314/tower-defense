@@ -16,7 +16,15 @@ const mouse = {
   height: 0.1
 }
 let canvasPosition = canvas.getBoundingClientRect();
-console.log(canvasPosition);
+// console.log(canvasPosition);
+canvas.addEventListener('mousemove', function (e) {
+  mouse.x = e.x - canvasPosition.left;
+  mouse.y = e.y - canvasPosition.top;
+});
+canvas.addEventListener('mouseleave', function (e) {
+  mouse.x = undefined;
+  mouse.y = undefined;
+})
 
 // game board
 const controlsBar = {
