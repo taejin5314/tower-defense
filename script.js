@@ -87,7 +87,7 @@ canvas.addEventListener('click', function () {
   const gridPositionY = mouse.y - mouse.y % cellSize;
   if (gridPositionY < cellSize) return;
   let defenderCost = 100;
-  if (numberOfResources > defenderCost) {
+  if (numberOfResources >= defenderCost) {
     defenders.push(new Defender(gridPositionX, gridPositionY));
     numberOfResources -= defenderCost;
   }
