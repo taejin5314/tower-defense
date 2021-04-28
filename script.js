@@ -6,14 +6,15 @@ canvas.height = 600;
 // global variables
 const cellSize = 100;
 const cellGap = 3;
-const gameGrid = [];
-const defenders = [];
 let numberOfResources = 300;
-const enemies = [];
-const enemyPositions = [];
 let enemiesInterval = 600;
 let frame = 0;
 let gameOver = false;
+const gameGrid = [];
+const defenders = [];
+const enemies = [];
+const enemyPositions = [];
+const projectiles = [];
 
 // mouse
 const mouse = {
@@ -67,6 +68,38 @@ function handleGameGrid() {
   }
 }
 // projectiles
+class Projectile {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = 10;
+    this.height = 10;
+    this.power = 20;
+    this.speed = 5;
+  }
+  update() {
+    this.x += this.speed;
+  }
+  draw() {
+    ctx.fillStyle = 'black';
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.width, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+function handleProjectiles() {
+  for (let i = 0; i < projectiles.length; i++) {
+    projectiles[i].update();
+    projectiles[i].draw();
+
+    if (projectiles[i] && projectiles[i].x > canvas.width - cellSize) {
+      projectiles.splice(i, 1);
+      i--;
+    }
+    console.log('projectiles ' + projectiles.length)
+  }
+}
+
 // defenders
 class Defender {
   constructor(x, y) {
@@ -86,6 +119,12 @@ class Defender {
     ctx.font = '30px Orbitron';
     ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30);
   }
+  update() {
+    this.timer++;
+    if (this.timer % 100 === 0) {
+      projectiles.push(new Projectile(this.x + cellSize, this.y + cellSize * 0.3))
+    }
+  }
 }
 canvas.addEventListener('click', function () {
   const gridPositionX = mouse.x - mouse.x % cellSize;
@@ -103,6 +142,7 @@ canvas.addEventListener('click', function () {
 function handleDefenders() {
   for (let i = 0; i < defenders.length; i++) {
     defenders[i].draw();
+    defenders[i].update();
     for (let j = 0; j < enemies.length; j++) {
       if (defenders[i] && collision(defenders[i], enemies[j])) {
         enemies[j].movement = 0;
@@ -174,6 +214,7 @@ function animate() {
   ctx.fillRect(0, 0, controlsBar.width, controlsBar.height);
   handleGameGrid();
   handleDefenders();
+  handleProjectiles();
   handleEnemies();
   handleGameStatus();
   frame++;
@@ -183,10 +224,10 @@ function animate() {
 animate();
 
 function collision(first, second) {
-  if (!(first.x > second.x + second.width ||
-    first.x + first.width < second.x ||
-    first.y > second.y + second.height ||
-    first.y + first.height < second.y)
+  if (!(first.x >= second.x + second.width ||
+    first.x + first.width <= second.x ||
+    first.y >= second.y + second.height ||
+    first.y + first.height <= second.y)
   ) {
     return true;
   }
