@@ -10,6 +10,8 @@ const gameGrid = [];
 const defenders = [];
 let numberOfResources = 300;
 const enemies = [];
+const enemyPositions = [];
+let enemiesInterval = 600;
 let frame = 0;
 
 // mouse
@@ -131,6 +133,11 @@ function handleEnemies() {
     enemies[i].update();
     enemies[i].draw();
   }
+  if (frame % enemiesInterval === 0) {
+    let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize;
+    enemies.push(new Enemy(verticalPosition))
+    enemyPositions.push(verticalPosition);
+  }
 }
 // resources
 // utilities
@@ -146,6 +153,7 @@ function animate() {
   ctx.fillRect(0, 0, controlsBar.width, controlsBar.height);
   handleGameGrid();
   handleDefenders();
+  handleEnemies();
   handleGameStatus();
   frame++;
   console.log(frame);
