@@ -83,7 +83,7 @@ class Defender {
     ctx.fillStyle = 'blue';
     ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.fillStyle = 'gold';
-    ctx.font = '20px Orbitron';
+    ctx.font = '30px Orbitron';
     ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30);
   }
 }
