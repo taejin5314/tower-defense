@@ -9,6 +9,8 @@ const cellGap = 3;
 const gameGrid = [];
 const defenders = [];
 let numberOfResources = 300;
+const enemies = [];
+let frame = 0;
 
 // mouse
 const mouse = {
@@ -102,6 +104,34 @@ function handleDefenders() {
 }
 
 // enemies
+class Enemy {
+  constructor(verticalPosition) {
+    this.x = canvas.width;
+    this.y = verticalPosition;
+    this.width = cellSize;
+    this.height = cellSize;
+    this.speed = Math.random() * 0.2 + 0.4;
+    this.movement = this.speed;
+    this.health = 100;
+    this.maxHealth = this.health;
+  }
+  update() {
+    this.x -= this.movement;
+  }
+  draw() {
+    ctx.fillStyle = 'red';
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.fillStyle = 'black';
+    ctx.font = '30px Arial';
+    ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30);
+  }
+}
+function handleEnemies() {
+  for (let i = 0; i < enemies.length; i++) {
+    enemies[i].update();
+    enemies[i].draw();
+  }
+}
 // resources
 // utilities
 function handleGameStatus() {
@@ -117,6 +147,8 @@ function animate() {
   handleGameGrid();
   handleDefenders();
   handleGameStatus();
+  frame++;
+  console.log(frame);
   requestAnimationFrame(animate);
 }
 animate();
