@@ -95,6 +95,8 @@ function handleProjectiles() {
     for (let j = 0; j < enemies.length; j++) {
       if (enemies[j] && projectiles[i] && collision(projectiles[i], enemies[j])) {
         enemies[j].health -= projectiles[i].power
+        projectiles.splice(i, 1);
+        i--;
       }
     }
     if (projectiles[i] && projectiles[i].x > canvas.width - cellSize) {
