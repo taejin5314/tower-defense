@@ -115,7 +115,7 @@ class Defender {
     this.y = y;
     this.width = cellSize;
     this.height = cellSize;
-    this.shooting = false;
+    this.shooting = true;
     this.health = 100;
     this.projectiles = [];
     this.timer = 0;
@@ -128,9 +128,13 @@ class Defender {
     ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30);
   }
   update() {
-    this.timer++;
-    if (this.timer % 100 === 0) {
-      projectiles.push(new Projectile(this.x + cellSize, this.y + cellSize * 0.3))
+    if (this.shooting) {
+      this.timer++;
+      if (this.timer % 100 === 0) {
+        projectiles.push(new Projectile(this.x + cellSize, this.y + cellSize * 0.3))
+      }
+    } else {
+      this.timer = 0;
     }
   }
 }
@@ -199,8 +203,11 @@ function handleEnemies() {
       let gainedResources = enemies[i].maxHealth * 0.1;
       numberOfResources += gainedResources;
       score += gainedResources;
+      const findThisIndex = enemyPositions.indexOf(enemies[i].y);
+      enemyPositions.splice(findThisIndex, 1);
       enemies.splice(i, 1);
       i--;
+      console.log(enemyPositions);
     }
   }
   if (frame % enemiesInterval === 0) {
