@@ -6,7 +6,7 @@ canvas.height = 600;
 // global variables
 const cellSize = 100;
 const cellGap = 3;
-let numberOfResources = 300;
+let numberOfResources = 500;
 let enemiesInterval = 600;
 let frame = 0;
 let gameOver = false;
