@@ -10,6 +10,7 @@ let numberOfResources = 300;
 let enemiesInterval = 600;
 let frame = 0;
 let gameOver = false;
+let score = 0;
 const gameGrid = [];
 const defenders = [];
 const enemies = [];
@@ -194,6 +195,13 @@ function handleEnemies() {
     if (enemies[i].x < 0) {
       gameOver = true;
     }
+    if (enemies[i].health <= 0) {
+      let gainedResources = enemies[i].maxHealth * 0.1;
+      numberOfResources += gainedResources;
+      score += gainedResources;
+      enemies.splice(i, 1);
+      i--;
+    }
   }
   if (frame % enemiesInterval === 0) {
     let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize;
@@ -207,7 +215,8 @@ function handleEnemies() {
 function handleGameStatus() {
   ctx.fillStyle = 'white';
   ctx.font = '30px Orbitron';
-  ctx.fillText('Resources: ' + numberOfResources, 20, 55);
+  ctx.fillText('Score: ' + score, 20, 40);
+  ctx.fillText('Resources: ' + numberOfResources, 20, 80);
   if (gameOver) {
     ctx.fillStyle = 'black';
     ctx.font = '90px Orbitron';
