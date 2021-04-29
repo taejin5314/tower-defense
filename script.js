@@ -92,11 +92,16 @@ function handleProjectiles() {
     projectiles[i].update();
     projectiles[i].draw();
 
+    for (let j = 0; j < enemies.length; j++) {
+      if (enemies[j] && projectiles[i] && collision(projectiles[i], enemies[j])) {
+        enemies[j].health -= projectiles[i].power
+      }
+    }
     if (projectiles[i] && projectiles[i].x > canvas.width - cellSize) {
       projectiles.splice(i, 1);
       i--;
     }
-    console.log('projectiles ' + projectiles.length)
+    // console.log('projectiles ' + projectiles.length)
   }
 }
 
