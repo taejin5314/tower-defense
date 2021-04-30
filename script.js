@@ -217,7 +217,7 @@ function handleEnemies() {
       console.log(enemyPositions);
     }
   }
-  if (frame % enemiesInterval === 0) {
+  if (frame % enemiesInterval === 0 && score < winningScore) {
     let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize;
     enemies.push(new Enemy(verticalPosition))
     enemyPositions.push(verticalPosition);
@@ -266,6 +266,13 @@ function handleGameStatus() {
     ctx.font = '90px Orbitron';
     ctx.fillText('GAME OVER', 135, 330);
   }
+  if (score < winningScore && enemies.length === 0) {
+    ctx.fillStyle = 'black';
+    ctx.font = '60px Orbitron';
+    ctx.fillText('LEVEL COMPLETE', 130, 300);
+    ctx.font = '30px Orbitron';
+    ctx.fillText('You win with ' + score + ' points!', 134, 340)
+  }
 }
 
 function animate() {
@@ -293,3 +300,7 @@ function collision(first, second) {
     return true;
   }
 }
+
+window.addEventListener('resize', function () {
+  canvasPosition = canvas.getBoundingClientRect();
+})
