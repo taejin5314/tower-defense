@@ -243,8 +243,14 @@ class Resource {
   }
 }
 function handleResources() {
-  if (frame % 500 === 0) {
+  if (frame % 500 === 0 && score < winningScore) {
     resources.push(new Resource())
+  }
+  for (let i = 0; i < resources.length; i++) {
+    resources[i].draw();
+    if (resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)) {
+
+    }
   }
 }
 // utilities
