@@ -249,7 +249,9 @@ function handleResources() {
   for (let i = 0; i < resources.length; i++) {
     resources[i].draw();
     if (resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)) {
-
+      numberOfResources += resources[i].amount;
+      resources.splice(i, 1);
+      i--;
     }
   }
 }
@@ -271,6 +273,7 @@ function animate() {
   ctx.fillStyle = 'blue'
   ctx.fillRect(0, 0, controlsBar.width, controlsBar.height);
   handleGameGrid();
+  handleResources();
   handleDefenders();
   handleProjectiles();
   handleEnemies();
