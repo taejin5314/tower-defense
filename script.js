@@ -237,7 +237,7 @@ class Resource {
   }
   draw() {
     ctx.fillStyle = 'yellow';
-    ctx.fillRect(this.x, this.y, this.width.this.height);
+    ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.fillStyle = 'black';
     ctx.fillText(this.amount, this.x + 15, this.y + 25);
   }
