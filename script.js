@@ -11,11 +11,13 @@ let enemiesInterval = 600;
 let frame = 0;
 let gameOver = false;
 let score = 0;
+const winningScore = 30;
 const gameGrid = [];
 const defenders = [];
 const enemies = [];
 const enemyPositions = [];
 const projectiles = [];
+const resources = [];
 
 // mouse
 const mouse = {
@@ -232,6 +234,17 @@ class Resource {
     this.width = cellSize * 0.6;
     this.height = cellSize * 0.6;
     this.amount = amounts[Math.floor(Math.random() * amounts.length)];
+  }
+  draw() {
+    ctx.fillStyle = 'yellow';
+    ctx.fillRect(this.x, this.y, this.width.this.height);
+    ctx.fillStyle = 'black';
+    ctx.fillText(this.amount, this.x + 15, this.y + 25);
+  }
+}
+function handleResources() {
+  if (frame % 500 === 0) {
+    resources.push(new Resource())
   }
 }
 // utilities
